@@ -26,7 +26,7 @@
 </div>
 
 <script>
-  fetch('./data.csv')
+  fetch('./sample_data.csv')
     .then(response => response.text())
     .then(data => {
       const rows = data.split('\n').slice(1);
@@ -42,4 +42,5 @@
     });
 </script>
 </body>
+
 </html>
