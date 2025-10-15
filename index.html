@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltage Summary ${seed}</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Total Voltage</h1>
+  <p id="totalVoltage"></p>
+</div>
+
+<script>
+  fetch('./data.csv')
+    .then(response => response.text())
+    .then(data => {
+      const rows = data.split('\n').slice(1);
+      let totalVoltage = 0;
+      rows.forEach(row => {
+        const values = row.split(',');
+        totalVoltage += parseFloat(values[2]);
+      });
+      document.getElementById('totalVoltage').textContent = `Total Voltage: ${totalVoltage.toFixed(2)}`;
+    })
+    .catch(error => {
+      document.getElementById('totalVoltage').textContent = 'Error fetching data';
+    });
+</script>
+</body>
+</html>
